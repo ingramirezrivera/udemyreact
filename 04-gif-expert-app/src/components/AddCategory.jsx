@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AddCategory = () => {
+const AddCategory = ( {onNewCategory} ) => {
 
     const [inputValue, setInputValue] = useState('');
 
@@ -11,11 +11,16 @@ const AddCategory = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        //? Previene que si no hay entrada no se sume al array
+        if(inputValue.trim() <= 1) return;
+        onNewCategory(inputValue.trim());
+        setInputValue('');
+        
         
     }
 
   return (
-    <form onSubmit= { (e) => onSubmit(e) }>
+    <form onSubmit= { onSubmit }>
         <input 
             type='text' 
             placeholder='Buscar Gifs' 
